@@ -119,10 +119,10 @@ module enforce_mfa {
 
 <!-- START makefile-doc -->
 ```
-$ make help
+$ make help 
 hooks                          Commit hooks setup
 validate                       Validate with pre-commit hooks
-changelog                      Update changelog
+changelog                      Update changelog 
 ```
 <!-- END makefile-doc -->
 
