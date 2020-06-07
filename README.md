@@ -1,22 +1,22 @@
-# Module Blueprint
+# Module TERRAFORM-AWS-ENFORCE-MFA
 
-Terraform module blueprint
+Terraform module `terraform-aws-enforce-mfa`
 
-[![](https://img.shields.io/github/license/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/v/tag/terraform-module/terraform-module-blueprint)
-[![](https://img.shields.io/github/workflow/status/terraform-module/terraform-module-blueprint/Validator/master)](https://github.com/terraform-module/terraform-module-blueprint/actions?query=is%3Acompleted)
-![](https://github.com/terraform-module/terraform-module-blueprint/workflows/Validator/badge.svg)
-![](https://github.com/terraform-module/terraform-module-blueprint/workflows/Labeler/badge.svg)
-![](https://img.shields.io/issues/github/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/issues/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/issues-closed/terraform-module/terraform-module-blueprint)
-[![](https://img.shields.io/github/languages/code-size/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-[![](https://img.shields.io/github/repo-size/terraform-module/terraform-module-blueprint)](https://github.com/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/languages/top/terraform-module/terraform-module-blueprint?color=green&logo=terraform&logoColor=blue)
-![](https://img.shields.io/github/commit-activity/m/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/contributors/terraform-module/terraform-module-blueprint)
-![](https://img.shields.io/github/last-commit/terraform-module/terraform-module-blueprint)
-[![Maintenance](https://img.shields.io/badge/Maintenu%3F-oui-green.svg)](https://GitHub.com/terraform-module/terraform-module-blueprint/graphs/commit-activity)
+[![](https://img.shields.io/github/license/terraform-module/terraform-aws-enforce-mfa)](https://github.com/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/v/tag/terraform-module/terraform-aws-enforce-mfa)
+[![](https://img.shields.io/github/workflow/status/terraform-module/terraform-aws-enforce-mfa/commit-check/master)](https://github.com/terraform-module/terraform-aws-enforce-mfa/actions?query=is%3Acompleted)
+![](https://github.com/terraform-module/terraform-aws-enforce-mfa/workflows/commit-check/badge.svg)
+![](https://github.com/terraform-module/terraform-aws-enforce-mfa/workflows/Labeler/badge.svg)
+![](https://img.shields.io/issues/github/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/issues/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/issues-closed/terraform-module/terraform-aws-enforce-mfa)
+[![](https://img.shields.io/github/languages/code-size/terraform-module/terraform-aws-enforce-mfa)](https://github.com/terraform-module/terraform-aws-enforce-mfa)
+[![](https://img.shields.io/github/repo-size/terraform-module/terraform-aws-enforce-mfa)](https://github.com/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/languages/top/terraform-module/terraform-aws-enforce-mfa?color=green&logo=terraform&logoColor=blue)
+![](https://img.shields.io/github/commit-activity/m/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/contributors/terraform-module/terraform-aws-enforce-mfa)
+![](https://img.shields.io/github/last-commit/terraform-module/terraform-aws-enforce-mfa)
+[![Maintenance](https://img.shields.io/badge/Maintenu%3F-oui-green.svg)](https://GitHub.com/terraform-module/terraform-aws-enforce-mfa/graphs/commit-activity)
 
 ## Usage example
 
@@ -40,11 +40,10 @@ Error: no lines in file
 
 <!-- START makefile-doc -->
 ```
-$ make help
+$ make help 
 hooks                          Commit hooks setup
 validate                       Validate with pre-commit hooks
-changelog                      Update changelog
-release                        Create release version
+changelog                      Update changelog 
 ```
 <!-- END makefile-doc -->
 
@@ -67,10 +66,10 @@ Submit a pull request
 
 # Authors
 
-Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) and these [awesome contributors](https://github.com/terraform-module/terraform-module-blueprint/graphs/contributors).
+Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) and these [awesome contributors](https://github.com/terraform-module/terraform-aws-enforce-mfa/graphs/contributors).
 
 [![ForTheBadge uses-git](http://ForTheBadge.com/images/badges/uses-git.svg)](https://GitHub.com/)
 
 ## Terraform Registry
 
-- [Module](https://registry.terraform.io/modules/terraform-module/todo)
+- [Module](https://registry.terraform.io/modules/terraform-module/terraform-aws-enforce-mfa)
