@@ -119,10 +119,10 @@ module enforce_mfa {
 
 <!-- START makefile-doc -->
 ```
-$ make help 
+$ make help
 hooks                          Commit hooks setup
 validate                       Validate with pre-commit hooks
-changelog                      Update changelog 
+changelog                      Update changelog
 ```
 <!-- END makefile-doc -->
 
@@ -151,4 +151,4 @@ Currently maintained by [Ivan Katliarchuk](https://github.com/ivankatliarchuk) a
 
 ## Terraform Registry
 
-- [Module](https://registry.terraform.io/modules/terraform-module/terraform-aws-enforce-mfa)
+- [Module](https://registry.terraform.io/modules/terraform-module/enforce-mfa/aws)
