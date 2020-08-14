@@ -1,13 +1,27 @@
 data aws_iam_policy_document this {
+
+  statement {
+    sid    = "AllowBasicVisiiblityWithoutMfa"
+    effect = "Allow"
+    actions = [
+      "iam:ListUsers",
+      "iam:GetAccountSummary",
+      "iam:ListAccountAliases",
+      "iam:ListVirtualMFADevices",
+      "iam:GetAccountPasswordPolicy"
+    ]
+    resources = ["*", ]
+  }
+
   statement {
     sid    = "MFAPersonalCreate"
     effect = "Allow"
     actions = [
       "iam:CreateVirtualMFADevice",
+      "iam:DeleteVirtualMFADevice"
     ]
     resources = [
       "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
     ]
   }
 
@@ -16,7 +30,6 @@ data aws_iam_policy_document this {
     effect = "Allow"
     actions = [
       "iam:DeleteVirtualMFADevice",
-      "iam:DeactivateMFADevice",
     ]
     resources = [
       "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
@@ -32,27 +45,11 @@ data aws_iam_policy_document this {
   statement {
     effect = "Allow"
     actions = [
-      "iam:EnableMFADevice",
       "iam:GetUser",
       "iam:ListGroupsForUser",
     ]
     resources = [
       "arn:aws:iam::${var.account_id}:user/&{aws:username}",
-    ]
-  }
-
-  statement {
-    sid    = "AllowIndividualUserToManageTheirOwnMFA"
-    effect = "Allow"
-    actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:DeleteVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:ResyncMFADevice",
-    ]
-    resources = [
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
-      "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
     ]
   }
 
@@ -78,20 +75,51 @@ data aws_iam_policy_document this {
   }
 
   statement {
+    sid    = "AllowToListOnlyOwnMFA"
+    effect = "Allow"
+    actions = [
+      "iam:ListMFADevices",
+    ]
+    resources = [
+      "arn:aws:iam::*:mfa/*",
+      "arn:aws:iam::*:user/&{aws:username}"
+    ]
+
+  }
+
+  statement {
+    sid    = "AllowManageOwnUserMFA"
     effect = "Allow"
     actions = [
       "iam:ChangePassword",
+      "iam:CreateLoginProfile",
       "iam:UpdateLoginProfile",
+      "iam:ListAccessKeys",
       "iam:UpdateUser",
       "iam:ListAttachedUserPolicies",
       "iam:ListSSHPublicKeys",
       "iam:ListAccessKeys",
       "iam:GetLoginProfile",
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
     ]
     resources = [
       "arn:aws:iam::${var.account_id}:user/&{aws:username}",
+    ]
+  }
+
+  statement {
+    sid    = "AllowUserToManageOwnMFA"
+    effect = "Allow"
+
+    actions = [
+      "iam:CreateVirtualMFADevice",
+      "iam:DeleteVirtualMFADevice",
+      "iam:EnableMFADevice",
+      "iam:ResyncMFADevice"
+    ]
+
+    resources = [
+      "arn:aws:iam::*:mfa/&{aws:username}",
+      "arn:aws:iam::*:user/&{aws:username}"
     ]
   }
 
@@ -109,101 +137,41 @@ data aws_iam_policy_document this {
   }
 
   statement {
+    sid    = "AllowUserToDeactivateOnlyOwnMFAWhenUsingMFA"
+    effect = "Allow"
+    actions = [
+      "iam:DeactivateMFADevice"
+    ]
+    resources = [
+      "arn:aws:iam::*:mfa/&{aws:username}",
+      "arn:aws:iam::*:user/&{aws:username}"
+    ]
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+  }
+
+  statement {
     sid    = "AllowBasicVisiiblityWhenLoggedInWithMFA"
     effect = "Allow"
     actions = [
-      "iam:GetAccountSummary",
-      "iam:ListAccountAliases",
-      "iam:GetAccountSummary",
       "iam:ListUserTags",
       "iam:ListGroupsForUser",
       "iam:ListPolicies",
-      "iam:ListUsers",
       "iam:GetGroup",
       "iam:GenerateServiceLastAccessedDetails",
       "iam:ListUserPolicies",
       "iam:GetUser",
       "iam:ListServiceSpecificCredentials",
       "iam:ListAttachedUserPolicies",
-      "iam:ListVirtualMFADevices",
-      "iam:ListMFADevices"
     ]
     resources = ["*", ]
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true", ]
-    }
-  }
-
-  statement {
-    sid    = "BlockMostAccessUnlessSignedInWithMFA"
-    effect = "Deny"
-    not_actions = [
-      "iam:CreateVirtualMFADevice",
-      "iam:DeleteVirtualMFADevice",
-      "iam:ListVirtualMFADevices",
-      "iam:EnableMFADevice",
-      "iam:ResyncMFADevice",
-      "iam:ListAccountAliases",
-      "iam:ListUsers",
-      "iam:ListSSHPublicKeys",
-      "iam:ListAccessKeys",
-      "iam:ListServiceSpecificCredentials",
-      "iam:ListMFADevices",
-      "iam:GetAccountSummary",
-      "sts:GetSessionToken"
-    ]
-    resources = ["*"]
-    condition {
-      test     = "BoolIfExists"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["false", ]
-    }
-  }
-
-  statement {
-    sid    = "BlockReadActionsUnlessSignedInWithMFA"
-    effect = "Deny"
-
-    actions = [
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
-      "iam:ListUsers",
-    ]
-
-    resources = [
-      "arn:aws:iam::${var.account_id}:user/",
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
-      "arn:aws:iam::${var.account_id}:mfa/",
-      "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
-    ]
-
-    condition {
-      test     = "BoolIfExists"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["false", ]
-    }
-  }
-
-  dynamic "statement" {
-    for_each = var.manage_own_password_without_mfa ? [] : [1]
-
-    content {
-      sid    = "ChangePasswordOnlyIfMFASet"
-      effect = "Deny"
-      actions = [
-        "iam:ChangePassword",
-        "iam:CreateLoginProfile",
-      ]
-      resources = [
-        "arn:aws:iam::${var.account_id}:user/&{aws:username}"
-      ]
-      condition {
-        test     = "BoolIfExists"
-        variable = "aws:MultiFactorAuthPresent"
-        values   = ["false", ]
-      }
     }
   }
 
@@ -299,6 +267,32 @@ data aws_iam_policy_document this {
         values = [
           var.manage_own_git_credentials,
         ]
+      }
+    }
+  }
+
+  # Deny
+
+  dynamic "statement" {
+    for_each = var.manage_explicit_deny ? [1] : []
+
+    content {
+      sid    = "DenyAllExceptListedIfNoMFA"
+      effect = "Deny"
+      actions = [
+        "iam:CreateVirtualMFADevice",
+        "iam:EnableMFADevice",
+        "iam:GetUser",
+        "iam:ListMFADevices",
+        "iam:ListVirtualMFADevices",
+        "iam:ResyncMFADevice",
+        "sts:GetSessionToken"
+      ]
+      resources = ["*"]
+      condition {
+        test     = "BoolIfExists"
+        variable = "aws:MultiFactorAuthPresent"
+        values   = ["false", ]
       }
     }
   }

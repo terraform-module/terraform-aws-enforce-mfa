@@ -10,12 +10,6 @@ variable "account_id" {
   type        = string
 }
 
-variable "manage_own_password_without_mfa" {
-  default     = true
-  description = "Whethehr password management without mfa is allowd"
-  type        = bool
-}
-
 variable "manage_own_access_keys" {
   default     = false
   description = "Allow a new AWS secret access key and corresponding AWS access key ID for the specified user."
@@ -37,6 +31,12 @@ variable "manage_own_ssh_public_keys" {
 variable "manage_own_git_credentials" {
   default     = false
   description = "Allow managing git credentials."
+  type        = bool
+}
+
+variable "manage_explicit_deny" {
+  default     = false
+  description = "Manage explicit deny."
   type        = bool
 }
 

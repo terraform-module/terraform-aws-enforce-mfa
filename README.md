@@ -64,7 +64,6 @@ module enforce_mfa {
   policy_name                     = "managed-mfa-enforce"
   account_id                      = data.aws_caller_identity.current.id
   groups                          = [aws_iam_group.support.name]
-  manage_own_password_without_mfa = true
   manage_own_signing_certificates  = true
   manage_own_ssh_public_keys      = true
   manage_own_git_credentials      = true
@@ -96,9 +95,9 @@ module enforce_mfa {
 |------|-------------|------|---------|:--------:|
 | account\_id | Account identification. (Optional, default '\*') | `string` | `"*"` | no |
 | groups | Enforce MFA for the members in these groups. (Optional, default '[]') | `list(string)` | `[]` | no |
+| manage\_explicit\_deny | Manage explicit deny. | `bool` | `false` | no |
 | manage\_own\_access\_keys | Allow a new AWS secret access key and corresponding AWS access key ID for the specified user. | `bool` | `false` | no |
 | manage\_own\_git\_credentials | Allow managing git credentials. | `bool` | `false` | no |
-| manage\_own\_password\_without\_mfa | Whethehr password management without mfa is allowd | `bool` | `true` | no |
 | manage\_own\_signing\_certificates | Allow managing signing certificates. | `bool` | `false` | no |
 | manage\_own\_ssh\_public\_keys | Allow managing ssh public keys. | `bool` | `false` | no |
 | path | Path in which to create the policy. (Optional, default '/') | `string` | `"/"` | no |
