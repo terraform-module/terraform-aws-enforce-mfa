@@ -279,7 +279,7 @@ data aws_iam_policy_document this {
     content {
       sid    = "DenyAllExceptListedIfNoMFA"
       effect = "Deny"
-      actions = [
+      not_actions = [
         "iam:CreateVirtualMFADevice",
         "iam:EnableMFADevice",
         "iam:GetUser",
