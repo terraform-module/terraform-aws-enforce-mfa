@@ -10,7 +10,7 @@ output "arn" {
 
 output "groups" {
   description = "The groups to which policy is attached"
-  value       = element(concat(aws_iam_group_policy_attachment.to_groups.*.group, list("")), 0)
+  value       = element(concat(aws_iam_group_policy_attachment.to_groups.*.group, tolist([""])), 0)
 }
 
 output "policy_json" {
