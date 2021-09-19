@@ -81,37 +81,49 @@ module enforce_mfa {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.38 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.38 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_iam_group_policy_attachment.to_groups](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| account\_id | Account identification. (Optional, default '\*') | `string` | `"*"` | no |
-| groups | Enforce MFA for the members in these groups. (Optional, default '[]') | `list(string)` | `[]` | no |
-| manage\_explicit\_deny | Manage explicit deny. | `bool` | `false` | no |
-| manage\_own\_access\_keys | Allow a new AWS secret access key and corresponding AWS access key ID for the specified user. | `bool` | `false` | no |
-| manage\_own\_git\_credentials | Allow managing git credentials. | `bool` | `false` | no |
-| manage\_own\_signing\_certificates | Allow managing signing certificates. | `bool` | `false` | no |
-| manage\_own\_ssh\_public\_keys | Allow managing ssh public keys. | `bool` | `false` | no |
-| path | Path in which to create the policy. (Optional, default '/') | `string` | `"/"` | no |
-| policy\_name | The name of the policy. | `string` | `"managed-force-mfa-policy"` | no |
+| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Account identification. (Optional, default '*') | `string` | `"*"` | no |
+| <a name="input_groups"></a> [groups](#input\_groups) | Enforce MFA for the members in these groups. (Optional, default '[]') | `list(string)` | `[]` | no |
+| <a name="input_manage_explicit_deny"></a> [manage\_explicit\_deny](#input\_manage\_explicit\_deny) | Manage explicit deny. | `bool` | `false` | no |
+| <a name="input_manage_own_access_keys"></a> [manage\_own\_access\_keys](#input\_manage\_own\_access\_keys) | Allow a new AWS secret access key and corresponding AWS access key ID for the specified user. | `bool` | `false` | no |
+| <a name="input_manage_own_git_credentials"></a> [manage\_own\_git\_credentials](#input\_manage\_own\_git\_credentials) | Allow managing git credentials. | `bool` | `false` | no |
+| <a name="input_manage_own_signing_certificates"></a> [manage\_own\_signing\_certificates](#input\_manage\_own\_signing\_certificates) | Allow managing signing certificates. | `bool` | `false` | no |
+| <a name="input_manage_own_ssh_public_keys"></a> [manage\_own\_ssh\_public\_keys](#input\_manage\_own\_ssh\_public\_keys) | Allow managing ssh public keys. | `bool` | `false` | no |
+| <a name="input_path"></a> [path](#input\_path) | Path in which to create the policy. (Optional, default '/') | `string` | `"/"` | no |
+| <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The name of the policy. | `string` | `"managed-force-mfa-policy"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | The policy's ARN. |
-| groups | The groups to which policy is attached |
-| id | The policy's ID. |
-| policy\_json | The above arguments serialized as a standard JSON policy document. |
-
+| <a name="output_arn"></a> [arn](#output\_arn) | The policy's ARN. |
+| <a name="output_groups"></a> [groups](#output\_groups) | The groups to which policy is attached |
+| <a name="output_id"></a> [id](#output\_id) | The policy's ID. |
+| <a name="output_policy_json"></a> [policy\_json](#output\_policy\_json) | The above arguments serialized as a standard JSON policy document. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Commands
