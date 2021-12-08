@@ -154,7 +154,7 @@ data "aws_iam_policy_document" "this" {
   }
 
   statement {
-    sid    = "AllowBasicVisiiblityWhenLoggedInWithMFA"
+    sid    = "AllowBasicVisibilityWhenLoggedInWithMFA"
     effect = "Allow"
     actions = [
       "iam:ListUserTags",
