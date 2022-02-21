@@ -132,8 +132,7 @@ No modules.
 ```
 $ make help 
 hooks                          Commit hooks setup
-validate                       Validate with pre-commit hooks
-changelog                      Update changelog 
+validate                       Validate with pre-commit hooks 
 ```
 <!-- END makefile-doc -->
 
@@ -145,8 +144,6 @@ changelog                      Update changelog
  - :blush: Be nice, civil and polite ([as always](http://contributor-covenant.org/version/1/4/)).
 
 ## License
-
-Copyright 2019 Ivan Katliarhcuk
 
 MIT Licensed. See [LICENSE](./LICENSE) for full details.
 
