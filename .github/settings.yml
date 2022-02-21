@@ -6,7 +6,7 @@ repository:
   name: terraform-aws-enforce-mfa
   description: ":information_source: Enforce MFA policy creation and enforcing on groups."
   homepage: https://ivankatliarchuk.github.io
-  topics: ivka, aws, terraform, mfa, terraform-module
+  topics: ivank, aws, terraform, mfa, terraform-module
   private: false
   has_issues: true
   has_projects: false
