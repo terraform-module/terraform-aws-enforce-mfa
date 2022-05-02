@@ -2,6 +2,8 @@
 
 Terraform module `terraform-aws-enforce-mfa`
 
+---
+
 [![](https://img.shields.io/github/license/terraform-module/terraform-aws-enforce-mfa)](https://github.com/terraform-module/terraform-aws-enforce-mfa)
 ![](https://img.shields.io/github/v/tag/terraform-module/terraform-aws-enforce-mfa)
 [![](https://img.shields.io/github/workflow/status/terraform-module/terraform-aws-enforce-mfa/commit-check/master)](https://github.com/terraform-module/terraform-aws-enforce-mfa/actions?query=is%3Acompleted)
@@ -17,6 +19,8 @@ Terraform module `terraform-aws-enforce-mfa`
 ![](https://img.shields.io/github/contributors/terraform-module/terraform-aws-enforce-mfa)
 ![](https://img.shields.io/github/last-commit/terraform-module/terraform-aws-enforce-mfa)
 [![Maintenance](https://img.shields.io/badge/Maintenu%3F-oui-green.svg)](https://GitHub.com/terraform-module/terraform-aws-enforce-mfa/graphs/commit-activity)
+
+---
 
 ## Documentations
 
@@ -59,7 +63,7 @@ resource aws_iam_group support {
 
 module enforce_mfa {
   source  = "terraform-module/enforce-mfa/aws"
-  version = "0.12.0"
+  version = "~> 1.0"
 
   policy_name                     = "managed-mfa-enforce"
   account_id                      = data.aws_caller_identity.current.id
@@ -130,9 +134,9 @@ No modules.
 
 <!-- START makefile-doc -->
 ```
-$ make help 
+$ make help
 hooks                          Commit hooks setup
-validate                       Validate with pre-commit hooks 
+validate                       Validate with pre-commit hooks
 ```
 <!-- END makefile-doc -->
 
