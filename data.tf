@@ -1,3 +1,9 @@
+data "aws_partition" "current" {}
+
+locals {
+  partition = data.aws_partition.current.partition
+}
+
 data "aws_iam_policy_document" "this" {
 
   statement {
@@ -21,7 +27,7 @@ data "aws_iam_policy_document" "this" {
       "iam:DeleteVirtualMFADevice"
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:mfa/&{aws:username}",
     ]
   }
 
@@ -32,8 +38,8 @@ data "aws_iam_policy_document" "this" {
       "iam:DeleteVirtualMFADevice",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:mfa/&{aws:username}",
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:mfa/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}",
     ]
     condition {
       test     = "Bool"
@@ -49,7 +55,7 @@ data "aws_iam_policy_document" "this" {
       "iam:ListGroupsForUser",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}",
     ]
   }
 
@@ -59,7 +65,7 @@ data "aws_iam_policy_document" "this" {
       "iam:ListGroups",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:group/",
+      "arn:${local.partition}:iam::${var.account_id}:group/",
     ]
   }
 
@@ -70,7 +76,7 @@ data "aws_iam_policy_document" "this" {
       "iam:ListAttachedGroupPolicies",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:group/*",
+      "arn:${local.partition}:iam::${var.account_id}:group/*",
     ]
   }
 
@@ -81,8 +87,8 @@ data "aws_iam_policy_document" "this" {
       "iam:ListMFADevices",
     ]
     resources = [
-      "arn:aws:iam::*:mfa/*",
-      "arn:aws:iam::*:user/&{aws:username}"
+      "arn:${local.partition}:iam::*:mfa/*",
+      "arn:${local.partition}:iam::*:user/&{aws:username}"
     ]
 
   }
@@ -102,7 +108,7 @@ data "aws_iam_policy_document" "this" {
       "iam:GetLoginProfile",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}",
     ]
   }
 
@@ -118,8 +124,8 @@ data "aws_iam_policy_document" "this" {
     ]
 
     resources = [
-      "arn:aws:iam::*:mfa/&{aws:username}",
-      "arn:aws:iam::*:user/&{aws:username}"
+      "arn:${local.partition}:iam::*:mfa/&{aws:username}",
+      "arn:${local.partition}:iam::*:user/&{aws:username}"
     ]
   }
 
@@ -132,7 +138,7 @@ data "aws_iam_policy_document" "this" {
       "iam:GetSSHPublicKey",
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:user/&{aws:username}",
+      "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}",
     ]
   }
 
@@ -143,8 +149,8 @@ data "aws_iam_policy_document" "this" {
       "iam:DeactivateMFADevice"
     ]
     resources = [
-      "arn:aws:iam::*:mfa/&{aws:username}",
-      "arn:aws:iam::*:user/&{aws:username}"
+      "arn:${local.partition}:iam::*:mfa/&{aws:username}",
+      "arn:${local.partition}:iam::*:user/&{aws:username}"
     ]
     condition {
       test     = "Bool"
@@ -188,7 +194,7 @@ data "aws_iam_policy_document" "this" {
         "iam:UpdateAccessKey",
       ]
       resources = [
-        "arn:aws:iam::${var.account_id}:user/&{aws:username}"
+        "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}"
       ]
       condition {
         test     = "BoolIfExists"
@@ -212,7 +218,7 @@ data "aws_iam_policy_document" "this" {
         "iam:UploadSigningCertificate",
       ]
       resources = [
-        "arn:aws:iam::${var.account_id}:user/&{aws:username}"
+        "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}"
       ]
       condition {
         test     = "BoolIfExists"
@@ -234,7 +240,7 @@ data "aws_iam_policy_document" "this" {
         "iam:UploadSSHPublicKey"
       ]
       resources = [
-        "arn:aws:iam::${var.account_id}:user/&{aws:username}"
+        "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}"
       ]
       condition {
         test     = "BoolIfExists"
@@ -258,7 +264,7 @@ data "aws_iam_policy_document" "this" {
         "iam:UpdateServiceSpecificCredential",
       ]
       resources = [
-        "arn:aws:iam::${var.account_id}:user/&{aws:username}"
+        "arn:${local.partition}:iam::${var.account_id}:user/&{aws:username}"
       ]
       condition {
         test     = "BoolIfExists"
